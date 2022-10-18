@@ -1,12 +1,9 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import Navigation from './src/navigation/Navigation'
-import Login from './screens/Login'
+import Navigation from './app/navigation/Navigation';
+import TabNavigation from './app/navigation/TabNavigation';
 
 export default function App() {
   return (
-    <Navigation>
-      
-    </Navigation>
+    <Navigation/>
+
   )
 }

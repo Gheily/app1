@@ -1,5 +1,8 @@
 import React, {useState} from "react";
-import { View, Text, StyleSheet, Image, TextInput, Pressable } from "react-native";
+import { View, Text, StyleSheet, Image, TextInput, Pressable, Alert } from "react-native";
+import { authentication } from "../config/firebase";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 import TabNavigation from "../navigation/TabNavigation";
 
 export default function Login(props) {
@@ -8,14 +11,36 @@ export default function Login(props) {
     const [password, setPassword] = useState(null);
 
     const login = () => {
+  
+        if(!email){
+            Alert.alert("Correo electrónico es requerido")
+        }else if(!password){
+            Alert.alert("Contraseña es requerida")
+        }else if(!email == setEmail){
+            Alert.alert("Contraseña incorrecta")
+        }else if(!password == setPassword){
+            Alert.alert("Contraseña incorrecta")
+        }else{
+            //código copiado de firebase - IniciarSesión de usuarios
+            signInWithEmailAndPassword(authentication, email, password)
+            .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            Alert.alert("Bienvenido");
+            })
+            .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            });
+            navigation.navigate("Main");
+        }
         
-        navigation.navigate("Main");
-
+        
     }
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Compra Fácil y Rápido</Text>
+            <Text style={styles.title}>Inicio de Sesión</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Correo Electrónico"

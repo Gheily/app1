@@ -6,24 +6,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from '../screens/Main/HomeScreen';
 import SettingsScreen from '../screens/Main/SettingsScreen';
+import CloseScreen from '../screens/Main/CloseScreen';
 
-/*function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}*/
-
-//const HomeStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigation() {
@@ -31,26 +15,27 @@ export default function TabNavigation() {
     
     <Tab.Navigator
     screenOptions={({ route }) => ({
-        tabBarLabel:() => {return null},
+      tabBarLabel:() => {return null},
       tabBarIcon: ({ focused, color, size }) => {
         let iconName;
 
-        if (route.name === 'Inicio') {
-          iconName = focused ? 'home' : 'home-outline';
-        } else if (route.name === 'Buscar') {
-          iconName = focused ? 'settings' : 'settings-online';
-        }else if (route.name === 'Perfil') {
-            iconName = focused ? 'person' : 'person-online';
-        }
-        // You can return any component that you like here!
-        return <Ionicons name={iconName} size={size} color={color} />;
-      },
-      tabBarActiveTintColor: '#purple',
-      tabBarInactiveTintColor: '#gray',
-    })}
-  >
-    <Tab.Screen name="home" component={HomeScreen} />
-    <Tab.Screen name="settings" component={SettingsScreen} options={{headerShown: true}} />
+          if (route.name === 'Directorio') {
+            iconName = focused ? 'bookmarks' : 'bookmarks-outline';
+          } else if (route.name === 'Registrar') {
+            iconName = focused ? 'create' : 'create-outline';
+          }else if (route.name === 'Cerrar Sesión') {
+            iconName = focused ? 'person' : 'person-outline';
+          }
+          // You can return any component that you like here!
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: "#02CCFF",
+        tabBarInactiveTintColor: '#gray',
+      })}
+    >
+      <Tab.Screen name="Directorio" component={HomeScreen} />
+      <Tab.Screen name="Registrar" component={SettingsScreen}/>
+      <Tab.Screen name = "Cerrar Sesión" component={CloseScreen}/>
     
     </Tab.Navigator>
     

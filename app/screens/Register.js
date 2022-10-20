@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { View, Text, StyleSheet, Image, TextInput, Pressable, Alert } from "react-native";
 import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
 import { authentication } from "../config/firebase";
+import TabNavigation from "../navigation/TabNavigation";
 
 
 export default function Register(props) {
@@ -20,23 +21,23 @@ export default function Register(props) {
             Alert.alert("Contraseña mínimo 6 caracteres")
         }else{
             //código copiado de firebase - Regitrar usuarios
-            /*createUserWithEmailAndPassword(authentication, email, password)
+            createUserWithEmailAndPassword(authentication, email, password)
             .then((userCredential) => {
-            const user = userCredential.user;*/
+            const user = userCredential.user;
             Alert.alert("Usuario correctamente creado");
-            /*})
+            })
             .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            });*/
+            });
         }
-        navigation.navigate("Login");
+        navigate("Login");
     }
 
     return (
         <View style={styles.container}>
             
-            <Text style={styles.title}>Compra Fácil y Rápido</Text>
+            <Text style={styles.title}>Registrar</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Correo Electrónico"

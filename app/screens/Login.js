@@ -1,9 +1,7 @@
 import React, {useState} from "react";
-import { View, Text, StyleSheet, Image, TextInput, Pressable, Alert } from "react-native";
+import { View, Text, StyleSheet, TextInput, Pressable, Alert } from "react-native";
 import { authentication } from "../config/firebase";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
-import TabNavigation from "../navigation/TabNavigation";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login(props) {
     const {navigation} = props;

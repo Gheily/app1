@@ -1,16 +1,12 @@
-import React, {useState, useEffect} from "react";
-import { View, Text, TextInput, Pressable, StyleSheet, Alert, NativeModules, SafeAreaView, FlatList } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { idGenerator } from "../../../utils/IdGenerator";
-import { doc, setDoc } from "firebase/firestore";
+import { View, Text, StyleSheet, SafeAreaView, FlatList } from 'react-native';
+import React, {useEffect} from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebase";
 
 export default function HomeScreen() {
 
   //hooks de estado
-  const [lista, setLista] = React.useState([]);
+  const [list, setLista] = React.useState([]);
   const [id, setId] = React.useState('');
   const [userName, setUserName] = React.useState('');
   const [fecha, setFecha] = React.useState('');
@@ -22,8 +18,9 @@ export default function HomeScreen() {
 
   //hooks de efecto: ayuda a visualizar lo primero de la aplicación
   useEffect(() => {
-    let list = [];
+    let list = []; //crear array para capturar 
   
+    //se debe poner async cuando hay "await"
     async function getDirectorio(){
       
       const querySnapshot = await getDocs(collection(db, "directorio"));
@@ -64,9 +61,9 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.container}>
       
       { //{}-> para colocar código porque SeafAreaView es solo una vista
-        lista.lenght > 0 ? (
+        list.lenght > 0 ? (
           <FlatList
-            data = {lista}
+            data = {list}
             renderItem = {renderItem}
             keyExtractor = {item => item.id}
           />
@@ -138,4 +135,4 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold',
   },
-});  
+});

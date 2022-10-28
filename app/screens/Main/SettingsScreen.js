@@ -1,9 +1,8 @@
-import { View, Text, SafeAreaView, StyleSheet, FlatList, Alert, Pressable, TextInput } from 'react-native'
-import React, {useEffect, useState} from 'react';
-import { collection, getDocs } from "firebase/firestore"; //Import de ..Primeros pasos con Cloud Firestore
+import { View, Text, StyleSheet, Alert, Pressable, TextInput } from 'react-native'
+import React, {useState} from 'react';
 import { db } from '../../config/firebase';
 import { idGenerator } from "../../../utils/IdGenerator";
-import { doc, setDoc } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
  
 export default function SettingsScreen() {
 
@@ -24,7 +23,7 @@ export default function SettingsScreen() {
     }else{
       const id = idGenerator(10); //id del Firebase
 
-      await setDoc(doc(db, "directorio", "id"), {
+      await addDoc(collection(db, "directorio"), {
         id: id,
         userName: userName,
         fecha: fecha,
@@ -37,6 +36,7 @@ export default function SettingsScreen() {
 
 //NativeModules.DevSettings.reload(); //recargar pantalla
 Alert.alert("Creación exitosa");
+console.log("Ok!");
 
     }
   };
